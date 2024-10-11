@@ -51,11 +51,6 @@ int vol1 = 1000;
 int vol2 = 100;  // разница значений = громкость
 int ton;
 
-// логин-пароль от роутера
-#define AP_SSID "MGBot"
-#define AP_PASS "Terminator812"
-
-
 void setup() {
   Serial.begin(115200);
   // Инициализация драйвера
