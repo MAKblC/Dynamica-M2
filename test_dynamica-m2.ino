@@ -171,8 +171,8 @@ bool setBusChannel(uint8_t i2c_channel)  // смена I2C порта
     return false;
   } else {
     Wire.beginTransmission(I2C_HUB_ADDR);
-    Wire.write(i2c_channel | EN_MASK);  // для микросхемы PCA9547
-                                        // Wire.write(0x01 << i2c_channel); // Для микросхемы PW548A
+    // Wire.write(i2c_channel | EN_MASK);  // для микросхемы PCA9547
+    Wire.write(0x01 << i2c_channel); // Для микросхемы PW548A
     Wire.endTransmission();
     return true;
   }
