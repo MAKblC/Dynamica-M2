@@ -30,7 +30,8 @@ Adafruit_MPU6050 mpu;
   I2C порт 0x03 - выводы GP18 (SDA), GP19 (SCL)
 */
 #include <MGB_I2C63.h>
-MGB_I2C63 mgb_i2c63 = MGB_I2C63(true);
+// false - для PW548A, true - для PCA9547
+MGB_I2C63 mgb_i2c63 = MGB_I2C63(false);
 #define GYRO 0x07
 #define DIST1 0x05
 #define DIST2 0x03
