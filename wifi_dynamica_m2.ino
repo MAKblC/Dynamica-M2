@@ -16,7 +16,7 @@ VL53L0X lox2;
 */
 #include <MGB_I2C63.h>
 // false - для PW548A, true - для PCA9547
-MGB_I2C63 mgb_i2c63 = MGB_I2C63(true);
+MGB_I2C63 mgb_i2c63 = MGB_I2C63(false);
 #define GYRO 0x07
 #define DIST1 0x05
 #define DIST2 0x03
