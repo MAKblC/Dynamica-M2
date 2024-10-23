@@ -106,7 +106,7 @@ void loop() {
   }
   // вывод расстояния до препятствий в индикаторы
   mgb_i2c63.setBusChannel(DIST1);
-  float dist1 = lox2.readRangeSingleMillimeters();
+  float dist1 = lox1.readRangeSingleMillimeters();
   mgb_i2c63.setBusChannel(DIST2);
   float dist2 = lox2.readRangeSingleMillimeters();
   if (0 < dist1 < 200) {
