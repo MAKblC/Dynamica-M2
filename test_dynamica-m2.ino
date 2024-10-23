@@ -7,8 +7,8 @@ uint16_t green_data = 0;
 uint16_t blue_data = 0;
 uint16_t clear_data = 0;
 uint16_t prox_data = 0;
-
 Adafruit_APDS9960 apds9960;
+
 #include <MGB_MDYN2.h>                                          // библиотека для моторной платы
 Adafruit_PWMServoDriver mdyn2 = Adafruit_PWMServoDriver(0x79);  // адрес платы
 
