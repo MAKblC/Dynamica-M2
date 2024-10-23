@@ -24,10 +24,6 @@ MGB_I2C63 mgb_i2c63 = MGB_I2C63(false);
 #include <MGB_BUZ1.h>  // библиотека для MGB-BUZ1
 Adafruit_MCP4725 buzzer;
 
-// логин-пароль от роутера
-#define AP_SSID "XXXXX"
-#define AP_PASS "XXXXXXXXX"
-
 #include <Arduino.h>
 #include <GyverHub.h>
 //GyverHub hub;
