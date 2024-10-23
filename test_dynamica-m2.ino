@@ -124,7 +124,7 @@ void loop() {
   Serial.println(" m/s^2");
   // MGS-D20
   mgb_i2c63.setBusChannel(DIST1);
-  float dist1 = lox2.readRangeSingleMillimeters();
+  float dist1 = lox1.readRangeSingleMillimeters();
   Serial.println("Расстояние 1 = " + String(dist1, 0) + " mm  ");
   mgb_i2c63.setBusChannel(DIST2);
   float dist2 = lox2.readRangeSingleMillimeters();
