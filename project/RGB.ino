@@ -1,7 +1,6 @@
 #include <Wire.h>
 #include <MGB_MDYN2.h>                                          // библиотека для моторной платы
 Adafruit_PWMServoDriver mdyn2 = Adafruit_PWMServoDriver(0x79);  // адрес платы
-float power = 0.3;
 
 void setup() {
   Serial.begin(115200);
