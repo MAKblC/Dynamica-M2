@@ -33,6 +33,7 @@ MGB_I2C63 mgb_i2c63 = MGB_I2C63(false);
 #define GYRO 0x07
 #define DIST1 0x05
 #define DIST2 0x03
+#define BUZ 0x06
 
 #include <MGB_BUZ1.h>  // библиотека для MGB-BUZ1
 Adafruit_MCP4725 buzzer;
@@ -51,7 +52,7 @@ void setup() {
 
   // запуск MGS-A6
   mgb_i2c63.setBusChannel(GYRO);
-  if (!mpu.begin(0x69)) {  // (0x68) (также попробуйте просканировать адрес: https://github.com/MAKblC/Codes/tree/master/I2C%20scanner)
+  if (!mpu.begin(0x69)) {  // без перемычки адрес 0х68
     Serial.println("Failed to find MPU6050 chip");
   }
   Serial.println("MPU6050 Found!");
@@ -69,6 +70,7 @@ void setup() {
   apds9960.enableProximity(true);
 
   // запуск генератора звука
+  mgb_i2c63.setBusChannel(BUZ);
   buzzer.begin(0x60);           // Без перемычки адрес будет 0x61
   buzzer.setVoltage(0, false);  // выключение звука
   buzzer.volume(800);           // громкость (1-999)
@@ -107,6 +109,7 @@ void loop() {
   mdyn2.rgb_set(4, 0, 0, 0);
   delay(1000);
   // включить звук
+  mgb_i2c63.setBusChannel(BUZ);
   buzzer.setVoltage(0, false);  // выключение звука
   buzzer.note(3, 450);
   buzzer.note(5, 150);
