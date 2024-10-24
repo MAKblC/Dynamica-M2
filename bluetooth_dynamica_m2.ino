@@ -4,12 +4,11 @@
 #include <RemoteXY.h>
 // конфигурация интерфейса RemoteXY
 #pragma pack(push, 1)
-uint8_t RemoteXY_CONF[] =  
-  { 255, 6, 0, 8, 0, 82, 0, 19, 0, 0, 0, 0, 31, 1, 106, 200, 1, 1, 5, 0,
-    5, 23, 52, 60, 60, 32, 2, 26, 31, 6, 24, 131, 58, 58, 2, 26, 73, 7, 12, 14,
-    32, 4, 128, 0, 2, 26, 0, 0, 0, 0, 0, 0, 200, 66, 0, 0, 0, 0, 73, 86,
-    13, 14, 32, 4, 128, 0, 2, 26, 0, 0, 0, 0, 0, 0, 200, 66, 0, 0, 0, 0,
-    1, 42, 15, 24, 24, 1, 9, 31, 0 };
+uint8_t RemoteXY_CONF[] = { 255, 6, 0, 8, 0, 82, 0, 19, 0, 0, 0, 0, 31, 1, 106, 200, 1, 1, 5, 0,
+                            5, 23, 52, 60, 60, 32, 2, 26, 31, 6, 24, 131, 58, 58, 2, 26, 73, 7, 12, 14,
+                            32, 4, 128, 0, 2, 26, 0, 0, 0, 0, 0, 0, 200, 66, 0, 0, 0, 0, 73, 86,
+                            13, 14, 32, 4, 128, 0, 2, 26, 0, 0, 0, 0, 0, 0, 200, 66, 0, 0, 0, 0,
+                            1, 42, 15, 24, 24, 1, 9, 31, 0 };
 struct {
   int8_t joystick_01_x;  // oт -100 до 100
   int8_t joystick_01_y;  // oт -100 до 100
@@ -31,7 +30,7 @@ struct {
 
 #include <MGB_MDYN2.h>                                          // библиотека для моторной платы
 Adafruit_PWMServoDriver mdyn2 = Adafruit_PWMServoDriver(0x79);  // адрес платы
-float power = 0.5;
+float power = 0.5; // мощность моторов 0-1
 
 #include <VL53L0X.h>  // библиотека для датчика MGS-D20
 VL53L0X lox1;
@@ -49,6 +48,7 @@ VL53L0X lox2;
 MGB_I2C63 mgb_i2c63 = MGB_I2C63(false);
 #define DIST1 0x05
 #define DIST2 0x03
+#define BUZ 0x06
 
 #include <MGB_BUZ1.h>  // библиотека для MGB-BUZ1
 Adafruit_MCP4725 buzzer;
@@ -67,10 +67,11 @@ void setup() {
   }
 
   // запуск генератора звука
+  mgb_i2c63.setBusChannel(BUZ);
   buzzer.begin(0x60);           // Без перемычки адрес будет 0x61
   buzzer.setVoltage(0, false);  // выключение звука
   buzzer.volume(800);           // громкость (1-999)
-  
+
   // запуск датчиков расстояния
   mgb_i2c63.setBusChannel(DIST1);
   lox1.init();
@@ -89,11 +90,11 @@ void loop() {
   // смещение бегунка по оси X ослабляет скорость одного из колес, тем самым можно повернуть
   // используйте переменную power для регулировки мощности моторов
   if (RemoteXY.joystick_01_x < 0) {
-    mdyn2.motor_setpower(1, power*RemoteXY.joystick_01_y, true);
-    mdyn2.motor_setpower(2, power*RemoteXY.joystick_01_y*(1-(abs(RemoteXY.joystick_01_x)/100)), false);
+    mdyn2.motor_setpower(1, power * RemoteXY.joystick_01_y, true);
+    mdyn2.motor_setpower(2, power * RemoteXY.joystick_01_y * (1 - (abs(RemoteXY.joystick_01_x) / 100)), false);
   } else {
-    mdyn2.motor_setpower(1, power*RemoteXY.joystick_01_y*(1-(RemoteXY.joystick_01_x)/100), true);
-    mdyn2.motor_setpower(2, power*RemoteXY.joystick_01_y, false);
+    mdyn2.motor_setpower(1, power * RemoteXY.joystick_01_y * (1 - (RemoteXY.joystick_01_x) / 100), true);
+    mdyn2.motor_setpower(2, power * RemoteXY.joystick_01_y, false);
   }
   // включение светодиодов с помощью RGB-круга
   for (int i = 1; i < 5; i++) {
@@ -102,6 +103,7 @@ void loop() {
   // включение звука по кнопке
   if (RemoteXY.button_01) {
     // кнопка нажата
+    mgb_i2c63.setBusChannel(BUZ);
     buzzer.note(3, 450);
   }
   // вывод расстояния до препятствий в индикаторы
