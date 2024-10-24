@@ -3,6 +3,7 @@
 #include <MGB_MDYN2.h>                                          // библиотека для моторной платы
 Adafruit_PWMServoDriver mdyn2 = Adafruit_PWMServoDriver(0x79);  // адрес платы
 float power = 0.3;
+
 #include <VL53L0X.h>  // библиотека для датчика MGS-D20
 VL53L0X lox1;
 VL53L0X lox2;
@@ -17,9 +18,9 @@ VL53L0X lox2;
 #include <MGB_I2C63.h>
 // false - для PW548A, true - для PCA9547
 MGB_I2C63 mgb_i2c63 = MGB_I2C63(false);
-#define GYRO 0x07
 #define DIST1 0x05
 #define DIST2 0x03
+#define BUZ 0x06
 
 #include <MGB_BUZ1.h>  // библиотека для MGB-BUZ1
 Adafruit_MCP4725 buzzer;
@@ -45,6 +46,7 @@ void build(gh::Builder& b) {
     b.Color(&colorRGB).label("RGB-светодиоды").size(2).attach(setColorRGB);
 
     if (b.Button().label("Генератор звука").click()) {
+      mgb_i2c63.setBusChannel(BUZ);
       buzzer.note(3, 450);
       buzzer.setVoltage(0, false);
     }
@@ -69,6 +71,7 @@ void setup() {
   }
 
   // запуск генератора звука
+  mgb_i2c63.setBusChannel(BUZ);
   buzzer.begin(0x60);           // Без перемычки адрес будет 0x61
   buzzer.setVoltage(0, false);  // выключение звука
   buzzer.volume(800);           // громкость (1-999)
@@ -114,8 +117,8 @@ void loop() {
   mdyn2.motor_setpower(1, power * mA, false);
   mdyn2.motor_setpower(2, power * mB, false);
 */
-///////////////////////////////////////////////
-/////////// с крестовины //////////////////////
+  ///////////////////////////////////////////////
+  /////////// с крестовины //////////////////////
   if (posi.y == -1) {
     mdyn2.motor_setpower(1, power * 50, false);
     mdyn2.motor_setpower(2, power * 50, true);
@@ -132,9 +135,9 @@ void loop() {
     mdyn2.motor_setpower(1, 0, false);
     mdyn2.motor_setpower(2, 0, false);
   }
-/////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
 
-   static gh::Timer tmr(1000);  // период 1 секунда
+  static gh::Timer tmr(1000);  // период 1 секунда
 
   // каждую секунду будем обновлять датчики
   if (tmr) {
