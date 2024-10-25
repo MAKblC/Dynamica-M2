@@ -69,3 +69,15 @@ void orient(int angle, int sec) {
   }
   lasttime = millis();
 }
+
+/*// ориентируемся угла angle (для другого триггера окончания)
+void orient2(int angle) {
+    int currentAngle = angleMeasure();
+    // ошибка = разница заданного курса и текущего
+    error = currentAngle - angle;
+    // разница добавляется и отнимается в скорость моторов
+    // данный простой П-регулятор можно регулировать с коэффициентами либо добавлять -И и -Д составляющие
+    mdyn2.motor_setpower(1, 15 + error, true);
+    mdyn2.motor_setpower(2, 15 - error, false);
+}
+*/
