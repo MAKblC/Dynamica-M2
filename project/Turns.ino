@@ -6,7 +6,6 @@ Adafruit_PWMServoDriver mdyn2 = Adafruit_PWMServoDriver(0x79);
 
 float speedDino = 20;  // скорость Робота
 int data[8];
-int massSens[8];
 byte digitData[8];
 
 int l = 1700;  // граница черного/белого
