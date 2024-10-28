@@ -137,24 +137,24 @@ String getColor() {
   Serial.println("GREEN = " + String(g));
   Serial.println("BLUE  = " + String(b));
   Serial.println("CLEAR  = " + String(c));*/
-  if (c > 11) {
+  if (c > 100) {
     for (int i = 1; i < 5; i++) {
       mdyn2.rgb_set(i, 0, 0, 0);
     }
     return "WHITE";
-  } else if (c < 5) {
+  } else if (c < 20) {
     return "BLACK";
-  } else if (r > 3 and g < 3 and b < 3) {
+  } else if (r > g) {
     for (int i = 1; i < 5; i++) {
       mdyn2.rgb_set(i, 255, 0, 0);
     }
     return "RED";
-  } else if (r < 4 and g > 4 and b < 5) {
+  } else if (g > r and g > b) {
     for (int i = 1; i < 5; i++) {
       mdyn2.rgb_set(i, 0, 255, 0);
     }
     return "GREEN";
-  } else if (r < 4 and g < 6 and b > 5) {
+  } else if (b > 3 * r) {
     for (int i = 1; i < 5; i++) {
       mdyn2.rgb_set(i, 0, 0, 255);
     }
