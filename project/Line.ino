@@ -6,7 +6,6 @@ Adafruit_PWMServoDriver mdyn2 = Adafruit_PWMServoDriver(0x79);  // адрес п
 
 float speedDino = 20; // скорость Робота
 int data[8];
-int massSens[8];
 byte digitData[8];
 
 // коэффициенты ускорения/замедления при смещении линии
@@ -14,8 +13,6 @@ int Kf[] = { 120, 90, 50, 15, -15, -50, -90, -120 };
 int findKf[8];
 int maxKf = 0, minKf = 0;
 float Lkf, Rkf;
-bool flagmove = true;
-uint32_t time = 0;
 
 void setup() {
   // Инициализация последовательного порта
