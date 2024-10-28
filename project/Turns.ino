@@ -16,8 +16,6 @@ int Kf[] = { 120, 90, 50, 15, -15, -50, -90, -120 };
 int findKf[8];
 int maxKf = 0, minKf = 0;
 float Lkf, Rkf;
-bool flagmove = true;
-uint32_t time = 0;
 
 void setup() {
   // Инициализация последовательного порта
