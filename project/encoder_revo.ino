@@ -1,7 +1,6 @@
 #define ENC_IN_RIGHT_A 35
 volatile long right_wheel_pulse_count = 0;
 
-#define WINDDIR_UPDATE_TIME 1000  // период обновления
 int circle = 360;                 // количество импульсов на оборот
 
 #include <Wire.h>
