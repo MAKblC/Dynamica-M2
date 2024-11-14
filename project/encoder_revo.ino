@@ -1,6 +1,8 @@
 #define ENC_IN_RIGHT_A 35
 volatile long right_wheel_pulse_count = 0;
 
+// для понимания этого числа используйте скетч
+// https://github.com/MAKblC/Dynamica-M2/blob/main/project/encoder.ino  
 int circle = 360;                 // количество импульсов на оборот
 
 #include <Wire.h>
