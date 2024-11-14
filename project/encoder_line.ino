@@ -6,6 +6,9 @@ volatile long right_wheel_pulse_count = 0;
 volatile long left_wheel_pulse_count = 0;
 #define ENC_UPDATE_TIME 70  // период обновления
 SimpleTimer timer_winddir;
+
+// для понимания этого числа используйте скетч
+// https://github.com/MAKblC/Dynamica-M2/blob/main/project/encoder.ino  
 int circle = 360;  // количество импульсов на оборот
 
 #include <Wire.h>                                               //библиотека для I2C интерфейса
