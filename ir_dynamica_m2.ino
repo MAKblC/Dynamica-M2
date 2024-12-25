@@ -37,23 +37,23 @@ void setup() {
 void loop() {
   if (irrecv.decode(&results)) {      // если данные пришли
     if (results.value == 0xFF18E7) {  // если это кнопка "2"
-      mdyn2.motor_setpower(1, power * 50, true);
-      mdyn2.motor_setpower(2, power * 50, false);
+      mdyn2.motor_setpower(1, power * 50, false);
+      mdyn2.motor_setpower(2, power * 50, true);
       delay(25);
     }
     if (results.value == 0xFF4AB5) {  // если это кнопка "8"
-      mdyn2.motor_setpower(1, power * 50, false);
-      mdyn2.motor_setpower(2, power * 50, true);
+      mdyn2.motor_setpower(1, power * 50, true);
+      mdyn2.motor_setpower(2, power * 50, false);
       delay(25);
     }
     if (results.value == 0xFF10EF) {  // если это кнопка "4"
-      mdyn2.motor_setpower(1, power * 50, true);
-      mdyn2.motor_setpower(2, power * 50, true);
+      mdyn2.motor_setpower(1, power * 50, false);
+      mdyn2.motor_setpower(2, power * 50, false);
       delay(25);
     }
     if (results.value == 0xFF5AA5) {  // если это кнопка "6"
-      mdyn2.motor_setpower(1, power * 50, false);
-      mdyn2.motor_setpower(2, power * 50, false);
+      mdyn2.motor_setpower(1, power * 50, true);
+      mdyn2.motor_setpower(2, power * 50, true);
       delay(25);
     }
     if (results.value == 0xFF38C7) {  // если это кнопка "5"
