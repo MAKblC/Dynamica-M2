@@ -5,7 +5,7 @@ volatile long encoderValue = 0;
 
 // для понимания этого числа используйте скетч
 // https://github.com/MAKblC/Dynamica-M2/blob/main/project/encoder.ino   
-int circle = 360; // количество импульсов в 1 обороте колеса        
+int circle = 690; // количество импульсов в 1 обороте колеса        
 
 void setup() {
   Serial.begin(115200);
