@@ -47,6 +47,6 @@ void loop() {
   // изменение скорости моторов в зависимости от разницы показаний датчиков расстояния
   float L = constrain(25 - 0.05 * (distL - distR), 5, 50);
   float R = constrain(25 + 0.05 * (distL - distR), 5, 50);
-  mdyn2.motor_setpower(2, L, false);
-  mdyn2.motor_setpower(1, R, true);
+  mdyn2.motor_setpower(2, L, true);
+  mdyn2.motor_setpower(1, R, false);
 }
