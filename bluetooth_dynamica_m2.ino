@@ -90,11 +90,11 @@ void loop() {
   // смещение бегунка по оси X ослабляет скорость одного из колес, тем самым можно повернуть
   // используйте переменную power для регулировки мощности моторов
   if (RemoteXY.joystick_01_x < 0) {
-    mdyn2.motor_setpower(1, power * RemoteXY.joystick_01_y, true);
-    mdyn2.motor_setpower(2, power * RemoteXY.joystick_01_y * (1 - (abs(RemoteXY.joystick_01_x) / 100)), false);
+    mdyn2.motor_setpower(1, power * RemoteXY.joystick_01_y, false);
+    mdyn2.motor_setpower(2, power * RemoteXY.joystick_01_y * (1 - (abs(RemoteXY.joystick_01_x) / 100)), true);
   } else {
-    mdyn2.motor_setpower(1, power * RemoteXY.joystick_01_y * (1 - (RemoteXY.joystick_01_x) / 100), true);
-    mdyn2.motor_setpower(2, power * RemoteXY.joystick_01_y, false);
+    mdyn2.motor_setpower(1, power * RemoteXY.joystick_01_y * (1 - (RemoteXY.joystick_01_x) / 100), false);
+    mdyn2.motor_setpower(2, power * RemoteXY.joystick_01_y, true);
   }
   // включение светодиодов с помощью RGB-круга
   for (int i = 1; i < 5; i++) {
