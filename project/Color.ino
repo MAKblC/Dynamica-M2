@@ -49,8 +49,8 @@ void loop() {
   addKf();
   // если путаница с линией, то едем прямо
   if (-minKf == maxKf) {
-    mdyn2.motor_setpower(1, speedDino, true);
-    mdyn2.motor_setpower(2, speedDino, false);
+    mdyn2.motor_setpower(1, speedDino, false);
+    mdyn2.motor_setpower(2, speedDino, true);
   } else {
     maxKf = maxKf < 0 ? 0 : maxKf;
     minKf = minKf > 0 ? 0 : minKf;
@@ -58,8 +58,8 @@ void loop() {
     Lkf = speedDino / 100 * (float)minKf;
     Rkf = speedDino / 100 * (float)maxKf;
     //Serial.println(String(speedDino - Rkf) + " / " + String(speedDino + Lkf));
-    mdyn2.motor_setpower(2, speedDino - Rkf, false);
-    mdyn2.motor_setpower(1, speedDino + Lkf, true);
+    mdyn2.motor_setpower(2, speedDino - Rkf, true);
+    mdyn2.motor_setpower(1, speedDino + Lkf, false);
   }
   Serial.println(getColor()); // вывод цвета
 }
