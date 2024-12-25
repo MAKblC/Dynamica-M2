@@ -114,26 +114,26 @@ void loop() {
   mA = constrain(mA, -100, 100);
   mB = constrain(mB, -100, 100);
 
-  mdyn2.motor_setpower(1, power * mA, false);
+  mdyn2.motor_setpower(1, power * mA, true);
   mdyn2.motor_setpower(2, power * mB, false);
 */
   ///////////////////////////////////////////////
   /////////// с крестовины //////////////////////
   if (posi.y == -1) {
-    mdyn2.motor_setpower(1, power * 50, false);
-    mdyn2.motor_setpower(2, power * 50, true);
+    mdyn2.motor_setpower(1, power * 50, true);
+    mdyn2.motor_setpower(2, power * 50, false);
   } else if (posi.y == 1) {
-    mdyn2.motor_setpower(1, power * 50, true);
-    mdyn2.motor_setpower(2, power * 50, false);
-  } else if (posi.x == -1) {
-    mdyn2.motor_setpower(1, power * 50, true);
+    mdyn2.motor_setpower(1, power * 50, false);
     mdyn2.motor_setpower(2, power * 50, true);
-  } else if (posi.x == 1) {
+  } else if (posi.x == -1) {
     mdyn2.motor_setpower(1, power * 50, false);
     mdyn2.motor_setpower(2, power * 50, false);
+  } else if (posi.x == 1) {
+    mdyn2.motor_setpower(1, power * 50, true);
+    mdyn2.motor_setpower(2, power * 50, true);
   } else {
-    mdyn2.motor_setpower(1, 0, false);
-    mdyn2.motor_setpower(2, 0, false);
+    mdyn2.motor_setpower(1, 0, true);
+    mdyn2.motor_setpower(2, 0, true);
   }
   /////////////////////////////////////////////////////
 
