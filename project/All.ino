@@ -83,8 +83,8 @@ void loop() {
     Serial.println("Distance right  = " + String(distR, 0) + " mm  ");
     float L = constrain(20 - 0.05 * (distL - distR), 5, 50);
     float R = constrain(20 + 0.05 * (distL - distR), 5, 50);
-    mdyn2.motor_setpower(2, L, false);
-    mdyn2.motor_setpower(1, R, true);
+    mdyn2.motor_setpower(2, L, true);
+    mdyn2.motor_setpower(1, R, false);
   } else {
     // в ином случае ищем линию
     if (digitSensor() == "GO") {  // если видим линию, то просто едем с выключенными светодиодами
@@ -94,8 +94,8 @@ void loop() {
       }
       // если путаница с линией, то едем прямо
       if (-minKf == maxKf) {
-        mdyn2.motor_setpower(1, speedDino, true);
-        mdyn2.motor_setpower(2, speedDino, false);
+        mdyn2.motor_setpower(1, speedDino, false);
+        mdyn2.motor_setpower(2, speedDino, true);
       } else {
         maxKf = maxKf < 0 ? 0 : maxKf;
         minKf = minKf > 0 ? 0 : minKf;
@@ -103,8 +103,8 @@ void loop() {
         Lkf = speedDino / 100 * (float)minKf;
         Rkf = speedDino / 100 * (float)maxKf;
         //Serial.println(String(speedDino - Rkf) + " / " + String(speedDino + Lkf));
-        mdyn2.motor_setpower(2, speedDino - Rkf, false);
-        mdyn2.motor_setpower(1, speedDino + Lkf, true);
+        mdyn2.motor_setpower(2, speedDino - Rkf, true);
+        mdyn2.motor_setpower(1, speedDino + Lkf, false);
       }
     } else if (digitSensor() == "RIGHT") {  // если видим поворот направо, то сигнализируем
       mdyn2.rgb_set(1, 255, 0, 0);
@@ -116,11 +116,11 @@ void loop() {
       for (int i = 1; i < 5; i++) {
         mdyn2.rgb_set(i, 255, 0, 0);
       }
-      mdyn2.motor_setpower(2, -10, false);
-      mdyn2.motor_setpower(1, -10, true);
+      mdyn2.motor_setpower(2, -10, true);
+      mdyn2.motor_setpower(1, -10, false);
       delay(50);
-      mdyn2.motor_setpower(2, 0, false);
-      mdyn2.motor_setpower(1, 0, true);
+      mdyn2.motor_setpower(2, 0, true);
+      mdyn2.motor_setpower(1, 0, false);
       angle(true, 180);  // повернуть против часовой на 180
       while (true) {};   // стоим
     }
@@ -221,7 +221,7 @@ void angle(bool side, int angle) {
   // измеряем текущий угол
   int currentAngle = angleMeasure();
   // если нужно повернуть по часовой (направо)
-  if (side == false) {
+  if (side == true) {
     // берем остаток от круга и поворачиваем, пока разница не станет меньше 10, но больше 0
     while (((currentAngle + angle) % 360) - angleMeasure() > compensation or ((currentAngle + angle) % 360) - angleMeasure() < 0) {
       // поворот на одном колесе
