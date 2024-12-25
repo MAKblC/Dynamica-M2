@@ -8,7 +8,7 @@ SimpleTimer timer_winddir;
 
 // для понимания этого числа используйте скетч
 // https://github.com/MAKblC/Dynamica-M2/blob/main/project/encoder.ino  
-int circle = 360;  // количество импульсов на оборот
+int circle = 690;  // количество импульсов на оборот
 
 #include <Wire.h>                                               //библиотека для I2C интерфейса
 #include <MGB_MDYN2.h>                                          // библиотека для моторной платы
