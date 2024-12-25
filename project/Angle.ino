@@ -43,17 +43,17 @@ void setup() {
 }
 
 void loop() {
-  angle(false, 90);  // повернуть по часовой на 90
-  angle(true, 180);  // повернуть против часовой на 180
-  angle(false, 90);  // повернуть по часовой на 90
+  angle(true, 90);  // повернуть по часовой на 90
+  angle(false, 180);  // повернуть против часовой на 180
+  angle(true, 90);  // повернуть по часовой на 90
 }
 
-// повернуть(сторона (направо 0/налево 1), угол)
+// повернуть(сторона (направо 1/налево 0), угол)
 void angle(bool side, int angle) {
   // измеряем текущий угол
   int currentAngle = angleMeasure();
   // если нужно повернуть по часовой (направо)
-  if (side == false) {
+  if (side == true) {
     // берем остаток от круга и поворачиваем, пока разница не станет меньше 10, но больше 0
     while (((currentAngle + angle) % 360) - angleMeasure() > compensation or ((currentAngle + angle) % 360) - angleMeasure() < 0) {
       // поворот на одном колесе
