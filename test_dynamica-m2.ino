@@ -87,14 +87,14 @@ void setup() {
 
 void loop() {
   // включаем моторы по часовой стрелке (мотор, скорость, направление)
-  mdyn2.motor_setpower(1, 30, false);
-  mdyn2.motor_setpower(2, 30, false);
-  delay(2000);
   mdyn2.motor_setpower(1, 30, true);
   mdyn2.motor_setpower(2, 30, true);
+  delay(2000);
+  mdyn2.motor_setpower(1, 30, false);
+  mdyn2.motor_setpower(2, 30, false);
   delay(20);
-  mdyn2.motor_setpower(1, 0, false);
-  mdyn2.motor_setpower(2, 0, false);
+  mdyn2.motor_setpower(1, 0, true);
+  mdyn2.motor_setpower(2, 0, true);
   delay(2000);
   // включить светодиоды
   mdyn2.rgb_set(1, 0, 255, 0);    // зеленый
