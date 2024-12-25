@@ -93,11 +93,11 @@ void forward(int distance) {
     orient2(angle_1);
   }
   // остановка
-  mdyn2.motor_setpower(1, -10, true);
-  mdyn2.motor_setpower(2, -10, false);
+  mdyn2.motor_setpower(1, -10, false);
+  mdyn2.motor_setpower(2, -10, true);
   delay(50);
-  mdyn2.motor_setpower(1, 0, true);
-  mdyn2.motor_setpower(2, 0, false);
+  mdyn2.motor_setpower(1, 0, false);
+  mdyn2.motor_setpower(2, 0, true);
 }
 
 // поворот на угол
@@ -105,7 +105,7 @@ void angle(bool side, int angle) {
   // измеряем текущий угол
   int currentAngle = angleMeasure();
   // если нужно повернуть по часовой (направо)
-  if (side == false) {
+  if (side == true) {
     // берем остаток от круга и поворачиваем, пока разница не станет меньше 10, но больше 0
     while (((currentAngle + angle) % 360) - angleMeasure() > compensation or ((currentAngle + angle) % 360) - angleMeasure() < 0) {
       // поворот на одном колесе
@@ -175,6 +175,6 @@ void orient2(int angle) {
   error = currentAngle - angle;
   // разница добавляется и отнимается в скорость моторов
   // данный простой П-регулятор можно регулировать с коэффициентами либо добавлять -И и -Д составляющие
-  mdyn2.motor_setpower(1, 22 + error, true);
-  mdyn2.motor_setpower(2, 22 - error, false);
+  mdyn2.motor_setpower(1, 22 + error, false);
+  mdyn2.motor_setpower(2, 22 - error, true);
 }
