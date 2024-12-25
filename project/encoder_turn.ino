@@ -5,7 +5,7 @@ volatile long left_wheel_pulse_count = 0;
 
 // для понимания этого числа используйте скетч
 // https://github.com/MAKblC/Dynamica-M2/blob/main/project/encoder.ino  
-int circle = 360;  // количество импульсов на оборот
+int circle = 690;  // количество импульсов на оборот
 
 int kf = 6; // количество оборотов колеса на полный оборот робота на одном колесе
 
