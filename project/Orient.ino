@@ -64,8 +64,8 @@ void orient(int angle, int sec) {
     error = currentAngle - angle;
     // разница добавляется и отнимается в скорость моторов
     // данный простой П-регулятор можно регулировать с коэффициентами либо добавлять -И и -Д составляющие
-    mdyn2.motor_setpower(1, 15 + error, true);
-    mdyn2.motor_setpower(2, 15 - error, false);
+    mdyn2.motor_setpower(1, 15 + error, false);
+    mdyn2.motor_setpower(2, 15 - error, true);
   }
   lasttime = millis();
 }
